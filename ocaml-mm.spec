@@ -1,17 +1,16 @@
 Name:     ocaml-mm
 
-Version:  0.3.0
-Release:  2
+Version:  0.3.1
+Release:  1
 Summary:  OCAML multimedia library
 License:  GPLv2+
-URL:      https://github.com/chambart/ocaml-mm
-Source0:  https://github.com/savonet/ocaml-mm/releases/download/0.3.0/ocaml-mm-0.3.0.tar.gz
+URL:      https://github.com/savonet/ocaml-mm
+Source0:  https://github.com/savonet/ocaml-mm/releases/download/%{version}/ocaml-mm-%{version}.tar.gz
 
 BuildRequires: ocaml
 BuildRequires: ocaml-mad
-BuildRequires: ocaml-bytes
+BuildRequires: ocaml-findlib
 Requires:      ocaml-mad
-Requires:      ocaml-bytes
 
 %prep
 %setup -q 
