@@ -1,7 +1,7 @@
 Name:     ocaml-mm
 
-Version:  0.3.1
-Release:  1
+Version:  0.4.0
+Release:  0.0%{dist}
 Summary:  OCAML multimedia library
 License:  GPLv2+
 URL:      https://github.com/savonet/ocaml-mm
@@ -70,5 +70,8 @@ ocaml-mm is a library dedicated to performing operations on multimedia contents.
 
 
 %changelog
-* Sun Jul  3 2016 Lucas Bickel <hairmare@rabe.ch>
+* Sun Nov 11 2018 Lucas Bickel <hairmare@rabe.ch> - 0.4.0-0.0
+- Bump to 0.4.0
+
+* Sun Jul  3 2016 Lucas Bickel <hairmare@rabe.ch> - 0.3.1-1
 - initial version, mostly stolen from https://www.openmamba.org/showfile.html?file=/pub/openmamba/devel/specs/ocaml-mm.spec
