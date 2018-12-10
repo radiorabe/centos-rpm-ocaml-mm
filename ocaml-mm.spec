@@ -1,24 +1,40 @@
 Name:     ocaml-mm
-
 Version:  0.4.0
-Release:  0.0%{dist}
+Release:  0.1%{dist}
 Summary:  OCAML multimedia library
+
+%global libname %(echo %{name} | sed -e 's/^ocaml-//')
+
 License:  GPLv2+
 URL:      https://github.com/savonet/ocaml-mm
 Source0:  https://github.com/savonet/ocaml-mm/releases/download/%{version}/ocaml-mm-%{version}.tar.gz
 
 BuildRequires: ocaml
-BuildRequires: ocaml-mad
+BuildRequires: ocaml-mad-devel
 BuildRequires: ocaml-findlib
 Requires:      ocaml-mad
 
+
+%description
+ocaml-mm is a library dedicated to performing operations on multimedia contents.
+
+
+%package        devel
+Summary:        Development files for %{name}
+Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+The %{name}-devel package contains libraries and signature
+files for developing applications that use %{name}.
+
+
 %prep
-%setup -q 
+%autosetup -n %{name}-%{version}
 
 %build
 ./configure \
    --prefix=%{_prefix} \
-   -disable-ldconf
+   --disable-ldconf
 make all
 
 %install
@@ -31,45 +47,30 @@ install -d $OCAMLFIND_DESTDIR/%{ocamlpck}
 make install
 
 %files
-/usr/lib64/ocaml/mm/IO.cmi
-/usr/lib64/ocaml/mm/IO.cmo
-/usr/lib64/ocaml/mm/IO.cmx
-/usr/lib64/ocaml/mm/META
-/usr/lib64/ocaml/mm/MIDI.cmi
-/usr/lib64/ocaml/mm/MIDI.cmo
-/usr/lib64/ocaml/mm/MIDI.cmx
-/usr/lib64/ocaml/mm/MIDI.mli
-/usr/lib64/ocaml/mm/audio.cmi
-/usr/lib64/ocaml/mm/audio.cmo
-/usr/lib64/ocaml/mm/audio.cmx
-/usr/lib64/ocaml/mm/audio.mli
-/usr/lib64/ocaml/mm/dllmm_stubs.so
-/usr/lib64/ocaml/mm/image.cmi
-/usr/lib64/ocaml/mm/image.cmo
-/usr/lib64/ocaml/mm/image.cmx
-/usr/lib64/ocaml/mm/image.mli
-/usr/lib64/ocaml/mm/libmm_stubs.a
-/usr/lib64/ocaml/mm/mm.a
-/usr/lib64/ocaml/mm/mm.cma
-/usr/lib64/ocaml/mm/mm.cmxa
-/usr/lib64/ocaml/mm/ringbuffer.cmi
-/usr/lib64/ocaml/mm/ringbuffer.cmo
-/usr/lib64/ocaml/mm/ringbuffer.cmx
-/usr/lib64/ocaml/mm/ringbuffer.mli
-/usr/lib64/ocaml/mm/synth.cmi
-/usr/lib64/ocaml/mm/synth.cmo
-/usr/lib64/ocaml/mm/synth.cmx
-/usr/lib64/ocaml/mm/synth.mli
-/usr/lib64/ocaml/mm/video.cmi
-/usr/lib64/ocaml/mm/video.cmo
-/usr/lib64/ocaml/mm/video.cmx
-/usr/lib64/ocaml/mm/video.mli
+%license COPYING
+%{_libdir}/ocaml/%{libname}
+%ifarch %{ocaml_native_compiler}
+%exclude %{_libdir}/ocaml/%{libname}/*.o
+%exclude %{_libdir}/ocaml/%{libname}/*.a
+%exclude %{_libdir}/ocaml/%{libname}/*.cmxa
+%exclude %{_libdir}/ocaml/%{libname}/*.cmx
+%exclude %{_libdir}/ocaml/%{libname}/*.ml
+%exclude %{_libdir}/ocaml/%{libname}/*.mli
+%endif
 
-%description
-ocaml-mm is a library dedicated to performing operations on multimedia contents.
-
+%files devel
+%license COPYING
+%ifarch %{ocaml_native_compiler}
+%{_libdir}/ocaml/%{libname}/*.a
+%{_libdir}/ocaml/%{libname}/*.cmxa
+%{_libdir}/ocaml/%{libname}/*.cmx
+%{_libdir}/ocaml/%{libname}/*.mli
+%endif
 
 %changelog
+* Sun Dec  9 2018 Lucas Bickel <hairmare@rabe.ch> - 0.4.0-0.1
+- Cleanup and add separate -devel subpackage
+
 * Sun Nov 11 2018 Lucas Bickel <hairmare@rabe.ch> - 0.4.0-0.0
 - Bump to 0.4.0
 
