@@ -1,6 +1,6 @@
 Name:     ocaml-mm
-Version:  0.4.0
-Release:  0.1%{dist}
+Version:  0.4.1
+Release:  0.0%{dist}
 Summary:  OCAML multimedia library
 
 %global libname %(echo %{name} | sed -e 's/^ocaml-//')
@@ -68,6 +68,9 @@ make install
 %endif
 
 %changelog
+* Sat Aug  3 2019 Lucas Bickel <hairmare@rabe.ch> - 0.4.1-0.0
+- Bump to 0.4.1
+
 * Sun Dec  9 2018 Lucas Bickel <hairmare@rabe.ch> - 0.4.0-0.1
 - Cleanup and add separate -devel subpackage
 
